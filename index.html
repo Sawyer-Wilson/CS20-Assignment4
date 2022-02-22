@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Joe's Hotdog Stand</title>
+</head>
+<body>
+    <script language="javascript">
+        // Ask user for their order
+        numHotdogs = prompt("How many hotdogs would you like?");
+        numFries = prompt("How many orders of fries would you like?");
+        numSodas = prompt("How many sodas would you like?");
+    </script>
+
+    <div id="content-wrapper">
+        <header>
+            <h1>Joe's Hotdog Stand</h1>
+        </header>
+    
+        <main>
+            <p id="hotdog"></p>
+            <p id="hotdog-cost"></p>
+            <p id="fries"></p>
+            <p id="fries-cost"></p>
+            <p id="soda"></p>
+            <p id="soda-cost"></p>
+            <p id="subtotal-label">Sub Total: </p>
+            <p id="subtotal"></p>
+            <p id="discount-label">Discount: </p>
+            <p id="discount"></p>
+            <p id="tax-label">Tax: </p>
+            <p id="tax"></p>
+            <p id="total-label">Total: </p>
+            <p id="total"></p>
+        </main>
+    </div>
+
+    <script language="javascript">
+        subtotal = (numHotdogs * 3.75) + (numFries * 2) + (numSodas * 1.8);
+
+        // Display items ordered and subtotals 
+        if (numHotdogs > 0) {
+            document.getElementById("hotdog").innerHTML = 
+                                                        numHotdogs + " Hotdog";
+            document.getElementById("hotdog-cost").innerHTML = 
+                                                (numHotdogs * 3.75).toFixed(2);
+        } else {
+            document.getElementById("hotdog").style.display = "none";
+            document.getElementById("hotdog-cost").style.display = "none";
+        }
+        if (numFries > 0) {
+            document.getElementById("fries").innerHTML = 
+                                                        numFries + " Fries";
+            document.getElementById("fries-cost").innerHTML = 
+                                                (numFries * 2).toFixed(2);
+        } else {
+            document.getElementById("fries").style.display = "none";
+            document.getElementById("fries-cost").style.display = "none";
+        }
+        if (numSodas > 0) {
+            document.getElementById("soda").innerHTML = 
+                                                        numSodas + " Soda";
+            document.getElementById("soda-cost").innerHTML = 
+                                                (numSodas * 1.8).toFixed(2);
+        } else {
+            document.getElementById("soda").style.display = "none";
+            document.getElementById("soda-cost").style.display = "none";
+        }
+        document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
+
+        // Calculate total based on discount and tax
+        discount = 0;
+        if (subtotal >= 20) {
+            discount = subtotal * 0.1;
+            subtotal = subtotal - discount;
+        }
+        tax = subtotal * 0.0625
+        subtotal = subtotal - tax;
+
+        // Display discount if applicable 
+        if (discount > 0) {
+            document.getElementById("discount").innerHTML = discount.toFixed(2);
+        } else {
+            document.getElementById("discount").style.display = "none";
+            document.getElementById("discount-label").style.display = "none";
+        }
+        
+        // Display tax and final total 
+        document.getElementById("tax").innerHTML = tax.toFixed(2);
+        document.getElementById("total").innerHTML = "$" + subtotal.toFixed(2);
+    </script>
+</body>
+</html>
